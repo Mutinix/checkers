@@ -14,7 +14,7 @@ class Piece
   end
   
   def to_s
-    " "git
+    " "
   end
 
 end
@@ -29,6 +29,19 @@ class RedPiece < Piece
   def to_s
     "R"
   end
+  
+  def valid_move?(from, to)
+    row = position_to_row(from)
+
+    return if row + 1 != position_to_row(to)
+
+    if row.even?
+      [from + 3, from + 4].include? to
+    else
+      [from + 4, from + 5].include? to
+    end
+  end
+  
 
 end
 
@@ -41,6 +54,17 @@ class WhitePiece < Piece
   
   def to_s
     "W"
+  end
+  
+  def valid_move?(from, to)
+    row = position_to_row(from)
+    return if row - 1 != position_to_row(to)
+
+    if row.even?
+      [from - 4, from - 5].include?(to)
+    else
+      [from - 3, from - 4].include?(to)
+    end
   end
   
 end
