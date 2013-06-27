@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+require 'colored'
 
 class Piece
 
@@ -31,7 +32,7 @@ class RedPiece < Piece
   end
   
   def to_s
-    "r"
+    " \u25CF ".red_on_black
   end
   
   def valid_move?(from, to)
@@ -74,7 +75,7 @@ class WhitePiece < Piece
   end
   
   def to_s
-    "w"
+    " \u25CF ".white_on_black
   end
   
   def valid_move?(from, to)
@@ -117,7 +118,7 @@ class KingPiece < Piece
   end
   
   def to_s
-    (@colour.to_s)[0].upcase
+    @colour == :white ? " \u25CE ".white_on_black : " \u25CE ".red_on_black
   end
   
   def valid_move?(from, to)
