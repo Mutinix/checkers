@@ -16,6 +16,10 @@ class Piece
   def to_s
     " "
   end
+  
+  def crown
+    KingPiece.new(@colour)
+  end
 
 end
 
@@ -27,7 +31,7 @@ class RedPiece < Piece
   end
   
   def to_s
-    "R"
+    "r"
   end
   
   def valid_move?(from, to)
@@ -70,7 +74,7 @@ class WhitePiece < Piece
   end
   
   def to_s
-    "W"
+    "w"
   end
   
   def valid_move?(from, to)
@@ -102,5 +106,27 @@ class WhitePiece < Piece
     position_to_row(piece_location) == 1
   end
  
- 
+end
+
+class KingPiece < Piece 
+  
+  def initialize(colour)
+    @colour = colour
+    @white_piece = WhitePiece.new
+    @red_piece = RedPiece.new
+  end
+  
+  def to_s
+    (@colour.to_s)[0].upcase
+  end
+  
+  def valid_move?(from, to)
+    @white_piece.valid_move?(from, to) || @red_piece.valid_move?(from, to)
+  end
+  
+  def valid_jump?(from, to)
+    @white_piece.valid_jump?(from, to) || @red_piece.valid_jump?(from, to)
+  end
+  
+  
 end
