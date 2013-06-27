@@ -42,6 +42,20 @@ class RedPiece < Piece
     end
   end
   
+  def valid_jump?(from, to)
+   row = position_to_row(from)
+   return if row + 2 != position_to_row(to)
+
+   case to
+   when from + 7
+     row.even? ? from + 3 : from + 4
+   when from + 9
+     row.even? ? from + 4 : from + 5
+   else
+     nil
+   end
+ end
+
 
 end
 
@@ -66,5 +80,18 @@ class WhitePiece < Piece
       [from - 3, from - 4].include?(to)
     end
   end
+  
+  def valid_jump?(from, to)
+   row = position_to_row(from)
+   return if row - 2 != position_to_row(to)
+
+   case to
+   when from - 7
+     row.even? ? from - 4 : from - 3
+   when from - 9
+     row.even? ? from - 5 : from - 4
+   else
+     nil
+   end
   
 end
