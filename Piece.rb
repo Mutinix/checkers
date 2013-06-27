@@ -54,8 +54,11 @@ class RedPiece < Piece
    else
      nil
    end
- end
+  end
 
+  def crowned?(piece_location)
+    position_to_row(piece_location) == 8
+  end
 
 end
 
@@ -93,5 +96,11 @@ class WhitePiece < Piece
    else
      nil
    end
+  end
   
+  def crowned?(piece_location)
+    position_to_row(piece_location) == 1
+  end
+ 
+ 
 end
