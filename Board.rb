@@ -34,27 +34,40 @@ class Board
   def to_s
     
     spaces = [" "] * 4
-    row = piece_squares[row_index * 4, 4]
     
-    output_board = ""
+    output_board = ["\n"]
     
     8.times do |row_index|
+      row = @pieces[row_index * 4, 4]
+      
       if row_index.even?
-        puts "It's even!"
         first = spaces
-        second = @pieces
+        second = row
       else
-        puts "It's odd!"
-        first = @pieces
+        first = row
         second = spaces
       end
       
       4.times do |col_index|
-        output_board += first[col_index].to_s + second[col_index].to_s
+        output_board << first[col_index]
+        output_board << second[col_index]
       end
-      output_board += "\n"
+      output_board << "\n"
     end
-    output_board
+    output_board.map!{|ch| ch == "" ? " " : ch}
+    output_board.join(" ")
   end
+
+  
+  def move(from, to)
+    execute_move(from, to) if @pieces[from - 1].valid_move?(from, to)
+  end
+  
+  def execute_move(from, to)
+    piece = @pieces[from - 1]
+    @pieces[from - 1] = nil
+    @pieces[to - 1] = piece
+  end
+
 
 end
