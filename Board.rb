@@ -32,7 +32,7 @@ class Board
   def white_count
     @pieces.count {|piece| !piece.nil? and piece.colour == :white}
   end
-  
+#REV: The board should include some sort of indexing to select positions  
   def to_s
     
     spaces = ["   ".white_on_cyan] * 4
@@ -116,7 +116,7 @@ class Board
       from, to = move_sequence[index], move_sequence[index+1]
     end  
   end
-  
+ #REV: Again, different errors for different things. Nice job overall! 
   def valid_move_seq?(move_sequence)
     begin
       perform_moves!(move_sequence)

@@ -3,7 +3,7 @@
 require 'colored'
 
 class Piece
-
+#REV: What's colour? :)
   attr_reader :colour
   
   def king?
@@ -24,7 +24,10 @@ class Piece
 
 end
 
-
+#REV: Interesting implementation. You could probably refactor this into a single
+#     piece class. In doing so, piece could contain generic methods that take in
+#     a symbol to represent color and the pieces location. In fact, I even passed
+#     in a piece type, so my entire piece class was less than 40 lines.
 class RedPiece < Piece
 
   def initialize
@@ -34,7 +37,10 @@ class RedPiece < Piece
   def to_s
     " \u25CF ".red_on_black
   end
-  
+
+#REV: Try to make an effort to make variables passed in clear in their name.
+#     Instead of From / To, starting_location / final_location
+#     I did this part quite differently anyway, using (row + space) % 2 == 1  
   def valid_move?(from, to)
     row = position_to_row(from)
 
@@ -61,6 +67,7 @@ class RedPiece < Piece
    end
   end
 
+#REV: If symbols were used, these methods can be combined with if  ?  :
   def crowned?(piece_location)
     position_to_row(piece_location) == 8
   end
